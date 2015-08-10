@@ -5,13 +5,16 @@ var express = require('express');
 var app = express();
 
 if(process.env.NODE_ENV !== 'production'){
-  require(path.join(process.cwd(),'/lib/secret'));
+  require(path.join(process.cwd(), '/lib/secrets'));
 }
 require(path.join(process.cwd(), '/lib/mongodb'));
 
+var artists = require(path.join(process.cwd(), '/routes/artists'));
+
 app.set('view engine', 'ejs');
 
-
+//========routes======//
+app.use('/artists', artists);
 
 var port = process.env.PORT || 3000;
 
