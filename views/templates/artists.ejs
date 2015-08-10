@@ -5,5 +5,23 @@
 </head>
 <body>
   <h1>Artists</h1>
+  <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Genre</th>
+          <th>Origin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% artists.forEach(function (artist) { %>
+          <tr>
+            <td><%= artist.name %></td>
+            <td><%= artist.genre %></td>
+            <td><%= artist.origin %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
 </body>
 </html>
