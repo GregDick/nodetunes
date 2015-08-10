@@ -1,0 +1,26 @@
+{
+  "name": "nodetunes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "mongodb": "^2.0.40"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GregDick/nodetunes.git"
+  },
+  "author": "Greg Dick",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GregDick/nodetunes/issues"
+  },
+  "homepage": "https://github.com/GregDick/nodetunes#readme"
+}
