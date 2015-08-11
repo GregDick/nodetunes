@@ -13,6 +13,8 @@ var artists = require(path.join(process.cwd(), '/routes/artists'));
 
 app.set('view engine', 'ejs');
 
+app.use(express.static('public'));
+
 //========routes======//
 app.use('/artists', artists);
 

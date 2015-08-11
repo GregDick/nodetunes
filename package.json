@@ -6,6 +6,7 @@
   "dependencies": {
     "ejs": "^2.3.3",
     "express": "^4.13.3",
+    "jquery": "^2.1.4",
     "mongodb": "^2.0.40"
   },
   "devDependencies": {},

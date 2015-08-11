@@ -1,27 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Nodetunes | Artists</title>
-</head>
-<body>
+<% include head %>
   <h1>Artists</h1>
+  <form class="artistSearch" action="/artists?name=name" method="GET">
+    Search an Artist by name:
+    <input type='text' name="name">
+    <button type="submit">Submit</button>
+  </form>
   <table>
-      <thead>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Origin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% artists.forEach(function (artist) { %>
         <tr>
-          <th>Name</th>
-          <th>Genre</th>
-          <th>Origin</th>
+          <td><%= artist.name %></td>
+          <td><%= artist.genre %></td>
+          <td><%= artist.origin %></td>
         </tr>
-      </thead>
-      <tbody>
-        <% artists.forEach(function (artist) { %>
-          <tr>
-            <td><%= artist.name %></td>
-            <td><%= artist.genre %></td>
-            <td><%= artist.origin %></td>
-          </tr>
-        <% }); %>
-      </tbody>
-    </table>
-</body>
-</html>
+      <% }); %>
+    </tbody>
+  </table>
+<% include foot %>
