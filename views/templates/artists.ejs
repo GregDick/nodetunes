@@ -1,9 +1,9 @@
 <% include head %>
   <h1>Artists</h1>
-  <form class="artistSearch" action="/artists?name=name" method="GET">
+  <form class="artistSearch" action="/artists/search" method="GET">
     Search an Artist by name:
     <input type='text' name="name">
-    <button type="submit">Submit</button>
+    <input type="submit" value="Search">
   </form>
   <table>
     <thead>

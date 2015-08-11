@@ -15,7 +15,19 @@ router.get('/', function(req, res){
   })
 });
 
-router.get('/', function(){})
+router.get('/search', function(req, res){
+  var collection = global.db.collection('nodetunes');
+  collection.find({name: req.query.name}).toArray(function(err, artist){
+    var prettyArtists = artist.map(function(artist){
+      return{
+        name : artist.name,
+        genre: artist.genre,
+        origin: artist.origin || 'N/A'
+      }
+    })
+    res.render('templates/artists', {artists: prettyArtists});
+  })
+})
 
 
 
