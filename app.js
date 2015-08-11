@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var bodyParser = require('body-parser');
 
 var express = require('express');
 var app = express();
@@ -14,6 +15,11 @@ var artists = require(path.join(process.cwd(), '/routes/artists'));
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
+
+app.use(bodyParser.urlencoded({
+  extended : true,
+  type     : '*/x-www-form-urlencoded'
+}));
 
 //========routes======//
 app.use('/artists', artists);
