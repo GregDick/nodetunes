@@ -1,8 +1,6 @@
-var $artistSearch = $('.artistSearch');
+$('.artistEdit').hide();
 
-// $artistSearch.on('submit', function(){
-//   $.get('/artists/search', {name: name})
-//     .done(function(data){
-//       console.log(data);
-//     })
-// })
+$('.editButton').on('click', function(){
+  $('.artistEdit').show();
+})
+

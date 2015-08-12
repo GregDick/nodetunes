@@ -8,6 +8,7 @@ router.get('/', function(req, res){
   collection.find().toArray(function(err, artist){
     var prettyArtists = artist.map(function(artist){
       return{
+        _id : artist._id,
         name : artist.name,
         genre: artist.genre,
         origin: artist.origin || 'N/A'
@@ -43,6 +44,34 @@ router.post('/new', function(req, res){
 });
 
 
+router.get('/:id', function(req, res){
+  var collection = global.db.collection('artists');
+  collection.findOne({_id: ObjectID(req.params.id)}, function(err, artist){
+    res.render('templates/single-artist', {artist: artist});
+  })
+})
+
+router.post('/:id/edit', function(req, res){
+  var collection = global.db.collection('artists');
+  collection.update({_id: ObjectID(req.params.id)}, {$set: {
+    name: req.body.name,
+    genre: req.body.genre,
+    origin: req.body.origin
+  }}, function(err, response){
+    res.redirect('/artists/' + req.params.id );
+  });
+})
+
+
+router.post('/:id/delete', function(req, res){
+  var collection = global.db.collection('artists');
+  collection.remove({_id: ObjectID(req.params.id)}, function(err, result){
+    if(err){
+      console.log(err);
+    }
+    res.redirect('/artists');
+  })
+})
 
 
 module.exports = router;

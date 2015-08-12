@@ -10,6 +10,7 @@ if(process.env.NODE_ENV !== 'production'){
 }
 require(path.join(process.cwd(), '/lib/mongodb'));
 
+var index = require(path.join(process.cwd(), '/routes/index'));
 var artists = require(path.join(process.cwd(), '/routes/artists'));
 
 app.set('view engine', 'ejs');
@@ -22,7 +23,17 @@ app.use(bodyParser.urlencoded({
 }));
 
 //========routes======//
+app.use('/', index)
 app.use('/artists', artists);
+
+
+app.use(function (err, req, res, next) {
+  // pass 4 arguments to create an error handling middleware
+  console.log('ERRRRRRRRRR', err.stack);
+  res.status(500).send('My Bad');
+});
+
+
 
 var port = process.env.PORT || 3000;
 

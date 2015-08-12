@@ -16,11 +16,11 @@
     </thead>
     <tbody>
       <% artists.forEach(function (artist) { %>
-        <tr>
-          <td><%= artist.name %></td>
-          <td><%= artist.genre %></td>
-          <td><%= artist.origin %></td>
-        </tr>
+          <tr>
+            <td><a href="artists/<%= artist._id %>"><%= artist.name %></a></td>
+            <td><a href="artists/<%= artist._id %>"><%= artist.genre %></a></td>
+            <td><a href="artists/<%= artist._id %>"><%= artist.origin %></a></td>
+          </tr>
       <% }); %>
     </tbody>
   </table>
