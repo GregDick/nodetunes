@@ -22,7 +22,17 @@
   </div>
   <div class="row">
     <form class="artistDelete" action="/artists/<%= artist._id%>/delete" method="POST">
-      <input class="btn btn-danger" type="submit" value="Delete">
+      <input class="btn btn-danger" type="submit" value="Delete Artist">
+    </form>
+  </div>
+  <div class="row">
+    <h3>Add an Album for this Artist</h3>
+    <form class='albumAdd' action="/albums/<%= artist._id%>/new" method='POST'>
+      <label>Title:</label>
+      <input type="text" name="title">
+      <label>Year:</label>
+      <input type="text" name="year">
+      <input type="submit" value="Add">
     </form>
   </div>
 <% include foot %>
