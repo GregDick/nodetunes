@@ -6,22 +6,40 @@
     <input type='text' name="search">
     <input type="submit" value="Search">
   </form>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Genre</th>
-        <th>Origin</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% artists.forEach(function (artist) { %>
-          <tr>
-            <td><a href="artists/<%= artist._id %>"><%= artist.name %></a></td>
-            <td><a href="artists/<%= artist._id %>"><%= artist.genre %></a></td>
-            <td><a href="artists/<%= artist._id %>"><%= artist.origin %></a></td>
-          </tr>
-      <% }); %>
-    </tbody>
-  </table>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>Name</h2>
+    </div>
+    <div class='col-md-3'>
+      <h2>Genre</h2>
+    </div>
+    <div class='col-md-3'>
+      <h2>Origin</h2>
+    </div>
+  </div>
+  <% artists.forEach(function (artist) { %>
+    <div class='row'>
+      <div class='col-md-3'>
+        <a href="artists/<%= artist._id %>">
+          <h4>
+            <%= artist.name %>
+          </h4>
+        </a>
+      </div>
+      <div class='col-md-3'>
+        <a href="artists/<%= artist._id %>">
+          <h4>
+            <%= artist.genre %>
+          </h4>
+        </a>
+      </div>
+      <div class='col-md-3'>
+        <a href="artists/<%= artist._id %>">
+          <h4>
+            <%= artist.origin %>
+          </h4>
+        </a>
+      </div>
+    </div>
+  <% }); %>
 <% include foot %>

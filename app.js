@@ -12,6 +12,7 @@ require(path.join(process.cwd(), '/lib/mongodb'));
 
 var index = require(path.join(process.cwd(), '/routes/index'));
 var artists = require(path.join(process.cwd(), '/routes/artists'));
+var albums = require(path.join(process.cwd(), '/routes/albums'));
 
 app.set('view engine', 'ejs');
 
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({
 //========routes======//
 app.use('/', index)
 app.use('/artists', artists);
+app.use('/albums', albums);
 
 
 app.use(function (err, req, res, next) {
