@@ -35,4 +35,20 @@
       <input type="submit" value="Add">
     </form>
   </div>
+  <div class="row">
+    <div class="col-md-6 pull-right">
+      <h3>Albums by <%= artist.name%></h3>
+    </div>
+  </div>
+<%albums.forEach(function(album){ %>
+  <div class="row">
+    <div class="col-md-3 pull-right">
+      <h4><%= album.year %></h4>
+    </div>
+    <div class="col-md-3 pull-right">
+      <h4><%= album.title %></h4>
+    </div>
+  </div>
+<%})%>
+
 <% include foot %>

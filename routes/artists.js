@@ -46,8 +46,11 @@ router.post('/new', function(req, res){
 
 router.get('/:id', function(req, res){
   var collection = global.db.collection('artists');
+  var albumCollection = global.db.collection('albums');
   collection.findOne({_id: ObjectID(req.params.id)}, function(err, artist){
-    res.render('templates/single-artist', {artist: artist});
+    albumCollection.find({artist_id: req.params.id}).toArray(function(err, albums){
+      res.render('templates/single-artist', {artist: artist, albums: albums});
+    })
   })
 })
 

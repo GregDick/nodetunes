@@ -13,7 +13,7 @@ router.get('/albums/search', function(req, res){
 router.post('/:id/new', function(req, res){
   var collection = global.db.collection('albums');
   collection.save(
-    {_id: ObjectID(req.params.id),
+    {artist_id: req.params.id,
     title: req.body.title,
     year: req.body.year
     }, function(err, response){
