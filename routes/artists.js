@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
-var Artist = require('../models/Artists')
+//models
+var Artist = require('../models/Artist');
+var Album = require('../models/Album');
 
 
 router.get('/', function(req, res){
@@ -30,10 +32,9 @@ router.post('/new', function(req, res){
 
 
 router.get('/:id', function(req, res){
-  var albumCollection = global.db.collection('albums');
-
   Artist.findById(req.params.id, function(err, artist){
-    albumCollection.find({artist_id: req.params.id}).toArray(function(err, albums){
+    Album.findAllByArtist(req.params.id, function(err, albums){
+      if (err) throw err;
       res.render('templates/single-artist', {artist: artist, albums: albums});
     });
   });

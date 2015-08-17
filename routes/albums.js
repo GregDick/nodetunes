@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
+//models
+var Artist = require('../models/Artist');
+var Album = require('../models/Album');
 
 router.get('/', function(req, res){
   res.render('templates/albums.ejs', {albums: []});
@@ -16,14 +19,10 @@ router.get('/search', function(req, res){
 })
 
 router.post('/:id/new', function(req, res){
-  var collection = global.db.collection('albums');
-  collection.save(
-    {artist_id: req.params.id,
-    title: req.body.title,
-    year: req.body.year
-    }, function(err, response){
-      res.redirect('/artists/'+req.params.id);
-    })
+  Album.create(req.params.id, req.body, function(err, album){
+    if (err) throw err;
+    res.redirect('/artists/'+req.params.id);
+  })
 })
 
 module.exports = router;
