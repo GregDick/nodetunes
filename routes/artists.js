@@ -23,43 +23,38 @@ router.get('/new', function(req, res){
 })
 
 router.post('/new', function(req, res){
-  var collection = global.db.collection('artists');
-  collection.save(req.body, function(err, response){
+  Artist.create(req.body, function(){
     res.redirect('/artists');
-  });
+  })
 });
 
 
 router.get('/:id', function(req, res){
-  var artistCollection = global.db.collection('artists');
   var albumCollection = global.db.collection('albums');
-  artistCollection.findOne({_id: ObjectID(req.params.id)}, function(err, artist){
+
+  Artist.findById(req.params.id, function(err, artist){
     albumCollection.find({artist_id: req.params.id}).toArray(function(err, albums){
       res.render('templates/single-artist', {artist: artist, albums: albums});
-    })
-  })
+    });
+  });
 })
 
 router.post('/:id/edit', function(req, res){
-  var collection = global.db.collection('artists');
-  collection.update({_id: ObjectID(req.params.id)}, {$set: {
-    name: req.body.name,
-    genre: req.body.genre,
-    origin: req.body.origin
-  }}, function(err, response){
-    res.redirect('/artists/' + req.params.id );
+  Artist.findById(req.params.id, function(err, artist){
+    artist.update(req.body, function(err, artist){
+      res.redirect('/artists/' + req.params.id );
+    });
   });
 })
 
 
 router.post('/:id/delete', function(req, res){
-  var collection = global.db.collection('artists');
-  collection.remove({_id: ObjectID(req.params.id)}, function(err, result){
-    if(err){
-      console.log(err);
-    }
-    res.redirect('/artists');
-  })
+  Artist.findById(req.params.id, function(err, artist){
+    artist.remove(function(err, response){
+      if (err) throw err;
+      res.redirect('/artists');
+    });
+  });
 })
 
 
