@@ -1,34 +1,20 @@
 var express = require('express');
 var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
+var Artist = require('../models/Artists')
 
 
 router.get('/', function(req, res){
-  var collection = global.db.collection('artists');
-  collection.find().toArray(function(err, artist){
-    var prettyArtists = artist.map(function(artist){
-      return{
-        _id : artist._id,
-        name : artist.name,
-        genre: artist.genre,
-        origin: artist.origin || 'N/A'
-      }
-    })
-    res.render('templates/artists', {artists: prettyArtists});
-  })
+  Artist.findAll(function(err, artists){
+    if (err) throw err;
+    res.render('templates/artists', {artists: artists});
+  });
 });
 
 router.get('/search', function(req, res){
-  var collection = global.db.collection('artists');
-  collection.find({name: req.query.search}).toArray(function(err, artist){
-    var prettyArtists = artist.map(function(artist){
-      return{
-        name : artist.name,
-        genre: artist.genre,
-        origin: artist.origin || 'N/A'
-      }
-    })
-    res.render('templates/artists', {artists: prettyArtists});
+  Artist.findByName(req.query.search, function(err, artist){
+    if (err) throw err;
+    res.render('templates/artists', {artists: artist});
   })
 });
 
@@ -45,9 +31,9 @@ router.post('/new', function(req, res){
 
 
 router.get('/:id', function(req, res){
-  var collection = global.db.collection('artists');
+  var artistCollection = global.db.collection('artists');
   var albumCollection = global.db.collection('albums');
-  collection.findOne({_id: ObjectID(req.params.id)}, function(err, artist){
+  artistCollection.findOne({_id: ObjectID(req.params.id)}, function(err, artist){
     albumCollection.find({artist_id: req.params.id}).toArray(function(err, albums){
       res.render('templates/single-artist', {artist: artist, albums: albums});
     })
