@@ -22,9 +22,13 @@ Album.findAllByArtist = function(artist_id, cb){
 }
 
 Album.findByTitle = function(title, cb){
-  Album.collection.find({title: title}).toArray(cb);
+  var re = new RegExp([title], 'i');
+  Album.collection.find({title: re}).toArray(cb);
 }
 
+Album.findById = function(id, cb){
+  Album.collection.findOne({_id: ObjectID(id)}, cb);
+}
 
 Object.defineProperty(Album, 'collection', {
   get: function(){

@@ -9,15 +9,17 @@
   <%if(albums!==null){ %>
     <%albums.forEach(function(album){ %>
     <div class="row">
-      <div class="col-md-3 pull-right">
-        <h4><%= album.year %></h4>
-      </div>
-      <div class="col-md-3 pull-right">
-        <h4><%= album.title %></h4>
-      </div>
-      <div class="col-md-3 pull-right">
-        <h4><%= album.artist %></h4>
-      </div>
+      <a href="/albums/<%= album._id%>">
+        <div class="col-md-3 pull-right">
+          <h4><%= album.year %></h4>
+        </div>
+        <div class="col-md-3 pull-right">
+          <h4><%= album.title %></h4>
+        </div>
+        <div class="col-md-3 pull-right">
+          <h4><%= album.artist %></h4>
+        </div>
+      </a>
     </div>
     <%})%>
   <%} %>
