@@ -17,6 +17,18 @@ Album.prototype.save = function(cb) {
   Album.collection.save(this, cb);
 };
 
+Album.prototype.update = function(updatedAlbum, cb){
+  Album.collection.update({_id: this._id}, {$set: {
+    title: updatedAlbum.title,
+    year: updatedAlbum.year
+  }}, cb)
+}
+
+Album.prototype.remove = function(cb){
+  Album.collection.remove({_id: this._id}, cb)
+}
+
+
 Album.findAllByArtist = function(artist_id, cb){
   Album.collection.find({artist_id: ObjectID(artist_id)}).toArray(cb);
 }
@@ -27,7 +39,9 @@ Album.findByTitle = function(title, cb){
 }
 
 Album.findById = function(id, cb){
-  Album.collection.findOne({_id: ObjectID(id)}, cb);
+  Album.collection.findOne({_id: ObjectID(id)}, function(err, album){
+    cb(err, setPrototype(album));
+  });
 }
 
 Object.defineProperty(Album, 'collection', {
@@ -39,5 +53,5 @@ Object.defineProperty(Album, 'collection', {
 module.exports = Album;
 
 function setPrototype(pojo) {
-  return _.create(Artist.prototype, pojo);
+  return _.create(Album.prototype, pojo);
 };

@@ -27,11 +27,13 @@ router.get('/search', function(req, res){
         res.render('templates/albums.ejs', {albums: albums})
       })
   })
-})
+});
 
 router.get('/:id', function(req, res){
   Album.findById(req.params.id, function(err, album){
-    res.render('templates/single-album', {album: album});
+    Artist.findById(album.artist_id, function(err, artist){
+      res.render('templates/single-album', {album: album, artist: artist});
+    });
   });
 });
 
@@ -40,7 +42,29 @@ router.post('/:id/new', function(req, res){
   Album.create(req.params.id, req.body, function(err, album){
     if (err) throw err;
     res.redirect('/artists/'+req.params.id);
+  });
+});
+
+router.post('/:id/edit', function(req, res){
+  Album.findById(req.params.id, function(err, album){
+    album.update(req.body, function(err, response){
+      res.redirect('/albums/' + req.params.id);
+    });
+  });
+});
+
+router.post('/:id/delete', function(req, res){
+  Album.findById(req.params.id, function(err, album){
+    album.remove(function (err, album) {
+      res.redirect('/');
+    })
   })
 })
 
 module.exports = router;
+
+
+
+
+
+

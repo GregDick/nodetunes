@@ -26,7 +26,7 @@
     </form>
   </div>
   <div class="row">
-    <h3>Add an Album for this Artist</h3>
+    <h3>Add an Album</h3>
     <form class='albumAdd' action="/albums/<%= artist._id%>/new" method='POST'>
       <label>Title:</label>
       <input type="text" name="title">
@@ -37,17 +37,19 @@
   </div>
   <div class="row">
     <div class="col-md-6 pull-right">
-      <h3>Albums by <%= artist.name%></h3>
+      <h3><%= artist.name%> Discography</h3>
     </div>
   </div>
 <%albums.forEach(function(album){ %>
   <div class="row">
-    <div class="col-md-3 pull-right">
-      <h4><%= album.year %></h4>
-    </div>
-    <div class="col-md-3 pull-right">
-      <h4><%= album.title %></h4>
-    </div>
+    <a href="/albums/<%= album._id%>">
+      <div class="col-md-3 pull-right">
+        <h4><%= album.year %></h4>
+      </div>
+      <div class="col-md-3 pull-right">
+        <h4><%= album.title %></h4>
+      </div>
+    </a>
   </div>
 <%})%>
 
