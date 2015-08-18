@@ -10,11 +10,22 @@ router.get('/', function(req, res){
 });
 
 router.get('/search', function(req, res){
-  var albumCollection = global.db.collection('albums');
-  var artistCollection = global.db.collection('artists');
-  albumCollection.find({title: req.query.title}).toArray(function(err, albums){
-    console.log(albums);
-    res.render('templates/albums.ejs', {albums: albums});
+  Album.findByTitle(req.query.title, function(err, albums){
+    //using promise because forEach loop is asynchronous
+    var first = new Promise(function(resolve, reject){
+      //find artist by id and add artist's name to album object
+      albums.forEach(function(album, i){
+        Artist.findById(album.artist_id, function(err, artist){
+          album.artist = artist.name;
+          //only resolve on last array item
+          if(i === albums.length-1) resolve(albums);
+        });
+      });
+    })
+    .then(
+      function(albums){
+        res.render('templates/albums.ejs', {albums: albums})
+      })
   })
 })
 

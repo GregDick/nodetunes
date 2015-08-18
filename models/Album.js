@@ -21,6 +21,10 @@ Album.findAllByArtist = function(artist_id, cb){
   Album.collection.find({artist_id: ObjectID(artist_id)}).toArray(cb);
 }
 
+Album.findByTitle = function(title, cb){
+  Album.collection.find({title: title}).toArray(cb);
+}
+
 
 Object.defineProperty(Album, 'collection', {
   get: function(){
