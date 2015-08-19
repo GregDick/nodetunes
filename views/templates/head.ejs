@@ -12,6 +12,14 @@
       <li>
         <a href="/">Home</a>
       </li>
+    <%if(!user){%>
+      <li>
+        <a href="/user">Login</a>
+      </li>
+      <li>
+        <a href="/user/new">Register</a>
+      </li>
+    <%}else{%>
       <li>
         <a href="/artists">Artists</a>
       </li>
@@ -21,5 +29,9 @@
       <li>
         <a href="/songs">Songs</a>
       </li>
+      <li>
+        <a href="/user/logout">Logout</a>
+      </li>
+    <%}%>
     </ul>
   </div>

@@ -3,6 +3,7 @@ var ObjectID = require('mongodb').ObjectID;
 var Album = require('../models/Album');
 
 function Artist(a){
+  this.userId = ObjectID(a.userId),
   this.name   = a.name,
   this.genre  = a.genre,
   this.origin = a.origin
@@ -38,13 +39,13 @@ Artist.findById = function(id, cb){
   })
 };
 
-Artist.findByName = function(name, cb){
+Artist.findByName = function(id, name, cb){
   var re = new RegExp([name], 'i');
-  Artist.collection.find({name: {$regex: re}}).toArray(cb);
+  Artist.collection.find({userId: ObjectID(id)}, {name: {$regex: re}}).toArray(cb);
 }
 
-Artist.findAll = function(cb){
-  Artist.collection.find().toArray(function(err, artists){
+Artist.findAllByUserId = function(id, cb){
+  Artist.collection.find({userId: ObjectID(id)}).toArray(function(err, artists){
     var prototypedArtists = artists.map(function (artist) {
       return setPrototype(artist);
     });

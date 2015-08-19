@@ -1,0 +1,11 @@
+<%- include('../templates/head') %>
+<h1>Login</h1>
+<form action="/user/login" method="POST">
+  <label>Email</label>
+  <input type="email" name="email" placeholder="Email@mail.com">
+  <label>Password</label>
+  <input type="password" name="password">
+  <input type="submit" value="Submit">
+</form>
+
+<%- include('../templates/foot') %>

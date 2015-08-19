@@ -1,0 +1,15 @@
+<%- include('../templates/head')%>
+<h1>Register a new profile</h1>
+<form action="/user/new" method="POST">
+  <label>Email</label>
+  <input type="email" name="email">
+  <label>Password</label>
+  <input type="password" name="password">
+  <label>Confirm Password</label>
+  <input type="password" name="password_confirm">
+  <input type="submit" value="Register">
+</form>
+<%if(err){%>
+  <h2><%= err %></h2>
+<%}%>
+<%- include('../templates/foot')%>

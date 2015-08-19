@@ -7,14 +7,14 @@ var Album = require('../models/Album');
 
 
 router.get('/', function(req, res){
-  Artist.findAll(function(err, artists){
+  Artist.findAllByUserId(req.session.user._id, function(err, artists){
     if (err) throw err;
     res.render('templates/artists', {artists: artists});
   });
 });
 
 router.get('/search', function(req, res){
-  Artist.findByName(req.query.search, function(err, artist){
+  Artist.findByName(req.session.user._id, req.query.search, function(err, artist){
     if (err) throw err;
     res.render('templates/artists', {artists: artist});
   })
@@ -25,7 +25,9 @@ router.get('/new', function(req, res){
 })
 
 router.post('/new', function(req, res){
-  Artist.create(req.body, function(){
+  var a = req.body;
+  a.userId = req.session.user._id;
+  Artist.create(a, function(){
     res.redirect('/artists');
   })
 });
