@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var ObjectID = require('mongodb').ObjectID;
+var Album = require('../models/Album');
 
 function Artist(a){
   this.name   = a.name,
@@ -25,7 +26,10 @@ Artist.prototype.update = function(updatedArtist, cb){
 };
 
 Artist.prototype.remove = function(cb){
-  Artist.collection.remove({_id: this._id}, cb)
+  var artist_id = this._id;
+  Album.collection.remove({artist_id: artist_id}, {multi: true}, function(){
+    Artist.collection.remove({_id: artist_id}, cb)
+  })
 };
 
 Artist.findById = function(id, cb){

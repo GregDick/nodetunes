@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var ObjectID = require('mongodb').ObjectID;
 var Artist = require('../models/Artist');
+var Song = require('../models/Song');
 
 function Album(id, a){
   this.artist_id = ObjectID(id),
@@ -25,7 +26,10 @@ Album.prototype.update = function(updatedAlbum, cb){
 }
 
 Album.prototype.remove = function(cb){
-  Album.collection.remove({_id: this._id}, cb)
+  var album_id = this._id;
+  Song.collection.remove({album_id: album_id}, {multi: true}, function(){
+    Album.collection.remove({_id: album_id}, cb);
+  })
 }
 
 

@@ -1,0 +1,23 @@
+<% include head %>
+  <h1>Songs</h1>
+  <h2>Search</h2>
+  <form class="songSearch" action="/songs/search" method="GET">
+    Title:
+    <input type="text" name="title">
+    <input type="submit" value="search">
+  </form>
+  <%if(songs!==null){ %>
+    <%songs.forEach(function(song){ %>
+    <div class="row">
+      <a href="/albums/<%= song.album_id%>">
+        <div class="col-md-3 pull-right">
+          <h4><%= song.album %></h4>
+        </div>
+        <div class="col-md-3 pull-right">
+          <h4><%= song.title %></h4>
+        </div>
+      </a>
+    </div>
+    <%})%>
+  <%} %>
+<% include foot %>

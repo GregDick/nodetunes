@@ -39,6 +39,10 @@
   <% songs.forEach(function(song){ %>
     <div class="row">
       <div class="col-md-3 pull-right">
+        <a class="btn btn-xs btn-success" href="/songs/<%= song._id%>/edit">Edit</a>
+        <a class="btn btn-xs btn-danger" href="/songs/<%= song._id%>/delete">Delete</a>
+      </div>
+      <div class="col-md-3 pull-right">
         <h4><%= song.title %></h4>
       </div>
     </div>
