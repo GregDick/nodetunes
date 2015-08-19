@@ -4,6 +4,7 @@ var Album = require('../models/Album');
 
 function Song (id, s){
   this.album_id = ObjectID(id),
+  this.userId = ObjectID(s.userId),
   this.title = s.title
 };
 
@@ -30,9 +31,9 @@ Song.findAllByAlbum = function(id, cb){
   Song.collection.find({album_id: ObjectID(id)}).toArray(cb);
 };
 
-Song.findByTitle = function(title, cb){
+Song.findByTitle = function(id, title, cb){
   var re = new RegExp([title], 'i');
-  Song.collection.find({title: re}).toArray(cb);
+  Song.collection.find({userId: ObjectID(id), title: re}).toArray(cb);
 };
 
 Song.findById = function(id, cb){

@@ -15,8 +15,11 @@ router.get('/', function(req, res){
 
 router.get('/search', function(req, res){
   Artist.findByName(req.session.user._id, req.query.search, function(err, artist){
-    if (err) throw err;
-    res.render('templates/artists', {artists: artist});
+    if (err) {
+      console.log(err);
+    }else{
+      res.render('templates/artists', {artists: artist});
+    }
   })
 });
 

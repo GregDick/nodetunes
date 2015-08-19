@@ -41,7 +41,7 @@ Artist.findById = function(id, cb){
 
 Artist.findByName = function(id, name, cb){
   var re = new RegExp([name], 'i');
-  Artist.collection.find({userId: ObjectID(id)}, {name: {$regex: re}}).toArray(cb);
+  Artist.collection.find({userId: ObjectID(id), name: {$regex: re}}).toArray(cb);
 }
 
 Artist.findAllByUserId = function(id, cb){

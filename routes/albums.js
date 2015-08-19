@@ -11,7 +11,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/search', function(req, res){
-  Album.findByTitle(req.query.title, function(err, albums){
+  Album.findByTitle(req.session.user._id, req.query.title, function(err, albums){
     //using promise because forEach loop is asynchronous
     new Promise(function(resolve, reject){
       //find artist by id and add artist's name to album object
@@ -42,7 +42,9 @@ router.get('/:id', function(req, res){
 
 //add album
 router.post('/:id/new', function(req, res){
-  Album.create(req.params.id, req.body, function(err, album){
+  var a = req.body;
+  a.userId = req.session.user._id;
+  Album.create(req.params.id, a, function(err, album){
     if (err) throw err;
     res.redirect('/artists/'+req.params.id);
   });
