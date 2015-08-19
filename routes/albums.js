@@ -4,6 +4,7 @@ var ObjectID = require('mongodb').ObjectID;
 //models
 var Artist = require('../models/Artist');
 var Album = require('../models/Album');
+var Song = require('../models/Song');
 
 router.get('/', function(req, res){
   res.render('templates/albums.ejs', {albums: []});
@@ -32,7 +33,9 @@ router.get('/search', function(req, res){
 router.get('/:id', function(req, res){
   Album.findById(req.params.id, function(err, album){
     Artist.findById(album.artist_id, function(err, artist){
-      res.render('templates/single-album', {album: album, artist: artist});
+      Song.findAllByAlbum(req.params.id, function(err, songs){
+        res.render('templates/single-album', {album: album, artist: artist, songs: songs})
+      })
     });
   });
 });

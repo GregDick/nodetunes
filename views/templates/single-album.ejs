@@ -6,9 +6,7 @@
     <h2><%= album.year%></h2>
   </div>
   <div class='row'>
-    <a href="/artists/<%= artist._id%>">
-      <h2>By: <%= artist.name%></h2>
-    </a>
+    <h2>By: <a href="/artists/<%= artist._id%>"><%= artist.name%></a></h2>
   </div>
   <div class='row'>
     <button class="btn btn-success editAlbumButton">Edit Album</button>
@@ -25,4 +23,24 @@
       <input class="btn btn-danger" type="submit" value="Delete Album">
     </form>
   </div>
+  <div class="row">
+    <h3>Add a track</h3>
+    <form action="/songs/<%= album._id %>/new" method="POST">
+      <label>Title</label>
+      <input type="text" name="title">
+      <input type="submit" value="Add">
+    </form>
+  </div>
+    <div class="row">
+      <div class="col-md-6 pull-right">
+        <h3>Track List</h3>
+      </div>
+    </div>
+  <% songs.forEach(function(song){ %>
+    <div class="row">
+      <div class="col-md-3 pull-right">
+        <h4><%= song.title %></h4>
+      </div>
+    </div>
+  <% }) %>
 <% include foot %>
