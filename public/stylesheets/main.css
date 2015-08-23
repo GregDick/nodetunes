@@ -1,3 +1,28 @@
-button, form{
+.nav {
+  margin-top: 15px;
+}
+
+.nav a {
+  font-size : 2em;
+}
+
+.header {
+  margin-top : 75px;
+}
+
+.header h1 {
+  font-size : 2.75em;
+}
+
+.node-logo {
+  margin-top : -155px;
+  margin-left : -69px;
+  padding: 60px;
+  height : 100%;
+  width : 100%;
+}
+
+
+button, form {
   margin-top: 15px;
 }
