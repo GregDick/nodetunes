@@ -1,6 +1,6 @@
 <% include head %>
-<div class='row'>
-    <h1><%= album.title%></h1>
+  <div class='row'>
+    <h1 class="albumTitle"><%= album.title%></h1>
   </div>
   <div class='row'>
     <h2><%= album.year%></h2>
@@ -31,11 +31,16 @@
       <input type="submit" value="Add">
     </form>
   </div>
-    <div class="row">
-      <div class="col-md-6 pull-right">
-        <h3>Track List</h3>
-      </div>
+  <div class="row">
+    <div class="col-md-6 pull-right albumArt">
+      <!-- append album art -->
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 pull-right">
+      <h3>Track List</h3>
+    </div>
+  </div>
   <% songs.forEach(function(song){ %>
     <div class="row">
       <div class="col-md-3 pull-right">
